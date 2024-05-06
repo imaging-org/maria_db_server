@@ -1,8 +1,12 @@
-FROM python:3.11.5-slim-bullseye as compiler
+FROM python as compiler
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y
+
+RUN apt-get install -y python3-dev
+RUN apt-get install -y openssl
 RUN apt-get install -y libmariadb-dev
+RUN apt-get install -y libmariadb3
 
 WORKDIR /app/
 
@@ -12,6 +16,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 COPY ./requirements.txt /app/requirements.txt
 RUN python -m pip install --upgrade pip
+RUN pip install mariadb==1.1.10
 RUN pip install -Ur requirements.txt
 
 FROM python:3.11.5-alpine3.18 as runner
