@@ -19,7 +19,7 @@ class Endpoints:
     GET_BATCH_STATUS = "/get_batch_status"
 
     ADD_USER = "/add_user"
-    LOGIN_USER = "/login_user"
+    GET_USER_WITH_PWD = "/get_user_with_pwd"
     UPDATE_USER = "/update_user"
     GET_USER_LIST = "/get_user_list"
     GET_USER = "/get_user"

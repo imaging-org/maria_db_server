@@ -30,21 +30,6 @@ def add_user():
         return __return_failure_response(str(err))
 
 
-def login_user():
-    try:
-        logger.info("Hit route /login_user")
-
-        resp_json = request.json
-        logger.info(resp_json)
-
-        return __return_success_response({
-            "status": "user added"
-        })
-
-    except Exception as err:
-        return __return_failure_response(str(err))
-
-
 def update_user():
     try:
         logger.info("Hit route /update_user")
@@ -97,6 +82,23 @@ def get_user():
         return __return_success_response({
             "user_data": user_data
         })
+
+    except Exception as err:
+        return __return_failure_response(str(err))
+
+
+def get_user_with_pwd():
+    try:
+        logger.info("Hit route /get_user_with_pwd")
+
+        user_name = request.json.get("user_name")
+        user_data = db_client.get_user_by_name_db(user_name)
+        if user_data:
+            return __return_success_response({
+                "user_data": user_data
+            })
+        else:
+            return __return_failure_response("No user by the provided user name", status_code=204)
 
     except Exception as err:
         return __return_failure_response(str(err))

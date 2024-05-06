@@ -10,9 +10,9 @@ def __return_success_response(body: dict = None):
                     response=json.dumps(body))
 
 
-def __return_failure_response(error: str = ""):
+def __return_failure_response(error: str = "", status_code=500):
     logger.error(f"Error : {error}")
-    return Response(status=500,
+    return Response(status=status_code,
                     response=json.dumps({
                         "error": error
                     }))

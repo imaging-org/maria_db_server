@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 
-from routes.user_crud_routes import get_user_list, get_user, add_user, delete_user, update_user, login_user
+from routes.user_crud_routes import get_user_list, get_user, add_user, delete_user, update_user, get_user_with_pwd
 from routes.batch_routes import (get_batch_status, get_batch_list, create_batch, update_similar_image_batch_status,
                                  update_delete_image_batch_status, update_reset_db_batch_status,
                                  update_save_image_batch_status)
@@ -15,7 +15,7 @@ CORS(app)
 
 # Add user cred routes
 app.add_url_rule(rule=Endpoints.ADD_USER, methods=HTTPMethods.POST_METHOD, view_func=add_user)
-app.add_url_rule(rule=Endpoints.LOGIN_USER, methods=HTTPMethods.POST_METHOD, view_func=login_user)
+app.add_url_rule(rule=Endpoints.GET_USER_WITH_PWD, methods=HTTPMethods.POST_METHOD, view_func=get_user_with_pwd)
 app.add_url_rule(rule=Endpoints.GET_USER, methods=HTTPMethods.GET_METHOD, view_func=get_user)
 app.add_url_rule(rule=Endpoints.GET_USER_LIST, methods=HTTPMethods.GET_METHOD, view_func=get_user_list)
 app.add_url_rule(rule=Endpoints.DELETE_USER, methods=HTTPMethods.DELETE_METHOD, view_func=delete_user)

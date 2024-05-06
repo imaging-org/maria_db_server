@@ -44,6 +44,17 @@ class DBUserServices:
         del res["password"]
         return res
 
+    def get_user_by_name_db(self, user_name):
+        sql_query_string = f"SELECT * FROM {TableConstants.USERS} WHERE user_name = ?"
+        self._cursor.execute(sql_query_string, (user_name,))
+        res = self._cursor.fetchone()
+
+        if res is None:
+            return res
+
+        res["created_date_time"] = res["created_date_time"].strftime('%Y-%m-%d %H:%M:%S')
+        return res
+
     def delete_user_by_id(self, user_id):
         sql_query_string = f"DELETE FROM {TableConstants.USERS} WHERE id = ?"
         self._cursor.execute(sql_query_string, (user_id,))
