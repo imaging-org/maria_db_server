@@ -11,6 +11,7 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 COPY ./requirements.txt /app/requirements.txt
+RUN python -m pip install --upgrade pip
 RUN pip install -Ur requirements.txt
 
 FROM python:3.11.5-alpine3.18 as runner
